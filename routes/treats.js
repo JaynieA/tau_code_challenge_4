@@ -5,6 +5,15 @@ var  connectionString = 'postgres://localhost:5432/treatDB'; // database name tr
 
 // GET /treats
 router.get('/', function (req, res) {
+  var q = req.query.q;
+  var queryString = '';
+  if (q != undefined) {
+    queryString = "SELECT * FROM treats WHERE name LIKE '%Cupc%'";
+    console.log(queryString);
+  } else {
+    queryString = 'SELECT * FROM treats'
+  } // end else
+  console.log(q);
   var treats = [];
   pg.connect(connectionString, function (err, client, done) {
     if (err) {
@@ -13,7 +22,7 @@ router.get('/', function (req, res) {
       done();
       return;
     } else {
-      var query = client.query('SELECT * FROM treats');
+      var query = client.query(queryString);
       query.on('row', function(row) {
         treats.push(row);
       }); // on query
