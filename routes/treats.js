@@ -8,12 +8,10 @@ router.get('/', function (req, res) {
   var q = req.query.q;
   var queryString = '';
   if (q != undefined) {
-    queryString = "SELECT * FROM treats WHERE name LIKE '%Cupc%'";
-    console.log(queryString);
+    queryString = "SELECT * FROM treats WHERE name LIKE '%"+q+"%'";
   } else {
     queryString = 'SELECT * FROM treats'
   } // end else
-  console.log(q);
   var treats = [];
   pg.connect(connectionString, function (err, client, done) {
     if (err) {
