@@ -4,11 +4,11 @@
 
 Your front-end developer has created all of the client-side code
 necessary to view, add, update, and delete treats from the treats
-database. The client side code has been minified, so you don't need to change these files at all. In fact, said developer even stubbed out most of your server-side code, as well! 
+database. In fact, said developer even stubbed out most of your server-side code, as well! The client side code has been minified, so you don't need to change these files at all. Just fork and clone this repo to get started.
 
 ## Database Setup
 
-Create a database call `treatDB` and create the following table in it.
+Create a database called `treatDB` and create the following table in it.
 
 ```SQL
 CREATE TABLE treats (
@@ -29,7 +29,7 @@ VALUES ('Cupcake', 'A delicious cupcake', '/assets/cupcake.jpg'),
 ## TODO
 
 ### Baseline (Base Mode)
-Before we can launch, we at least need to be able to view add new treats. Finish implementing the following routes in the `routes/treats.js` file:
+Before we can launch, we at least need to be able to view and add new treats. Finish implementing the following routes in the `routes/treats.js` file:
 
 * `GET /treats` returns a list of potential treats (e.g. cupcakes, goldfish, etc) and their image URLs
 
