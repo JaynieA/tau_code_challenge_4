@@ -51,6 +51,27 @@ router.post('/', function(req, res) {
 }); // end post
 
 // PUT /treats/<id>
+router.put('/:id', function(req, res) {
+  var id = req.params.id;
+  console.log(id);
+  //unpack request values
+  var name = req.body.name;
+  var description = req.body.description;
+  var pic = req.body.pic;
+  pg.connect(connectionString, function(err, client, done) {
+    if (err) {
+      console.log(err);
+    } else {
+      var query = client.query('UPDATE treats SET name = $1, description = $2, pic = $3 WHERE id = $4', [name, description, pic, id], function(err, response) {
+        if (err) {
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(201);
+        } // end else
+      }); // end query
+    } // end else
+  }); // end pg connect
+}); // end put
 
 // DELETE /treats/<id>
 
