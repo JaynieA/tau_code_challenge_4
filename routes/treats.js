@@ -5,15 +5,25 @@ var  connectionString = 'postgres://localhost:5432/treatDB'; // database name tr
 
 // GET /treats
 router.get('/', function (req, res) {
+  var treats = [];
   pg.connect(connectionString, function (err, client, done) {
     if (err) {
       console.log('Error connecting to the DB', err);
       res.sendStatus(500);
       done();
       return;
-    }
-    /** ---- YOUR CODE BELOW ---- **/
-    // Add pg and pSQL code here to get treats from the treatDB
+      /** ---- YOUR CODE BELOW ---- **/
+      // Add pg and pSQL code here to get treats from the treatDB
+    } else {
+      var query = client.query('SELECT * FROM treats');
+      query.on('row', function(row) {
+        treats.push(row);
+      }); // on query
+      query.on('end', function() {
+        done();
+        res.send(treats);
+      }); // end query
+    } // end else
   });
 });
 
