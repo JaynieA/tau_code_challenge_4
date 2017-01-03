@@ -74,6 +74,23 @@ router.put('/:id', function(req, res) {
 }); // end put
 
 // DELETE /treats/<id>
+router.delete('/:id', function(req, res) {
+  var id = req.params.id;
+  console.log(id);
+  pg.connect(connectionString, function(err, client, done) {
+    if (err) {
+      console.log(err);
+    } else {
+      var query = client.query('DELETE FROM treats WHERE id = $1', [id], function(err, response) {
+        if (err) {
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(200);
+        } // end else
+      }); // end query
+    } // end else
+  }); // end pg connect
+}); // end put
 
 /** ---- DO NOT MODIFY BELOW ---- **/
 module.exports = router;
