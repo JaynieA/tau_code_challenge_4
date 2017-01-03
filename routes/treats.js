@@ -38,10 +38,14 @@ router.post('/', function(req, res) {
       var name = req.body.name;
       var description = req.body.description;
       var pic = req.body.pic;
-      var query = client.query('INSERT INTO treats (name, description, pic) VALUES ($1, $2, $3)', [name, description, pic]);
-      query.on('end', function() {
-        res.sendStatus(201);
-      }); // end query on
+      var query = client.query('INSERT INTO treats (name, description, pic) VALUES ($1, $2, $3)', [name, description, pic], function(err, response) {
+        if (err) {
+          console.log(err);
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(201);
+        } // end else
+      }); // end query
     } // end else
   }); // end pg connect
 }); // end post
