@@ -7,10 +7,10 @@ var  connectionString = 'postgres://localhost:5432/treatDB'; // database name tr
 router.get('/', function (req, res) {
   var q = req.query.q;
   var queryString = '';
-  if (q != undefined) {
+  if (q !== undefined) {
     queryString = "SELECT * FROM treats WHERE name LIKE '%"+q+"%'";
   } else {
-    queryString = 'SELECT * FROM treats'
+    queryString = 'SELECT * FROM treats';
   } // end else
   var treats = [];
   pg.connect(connectionString, function (err, client, done) {
